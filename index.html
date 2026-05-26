@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Summer School 2026 — Faculty of Animal Sciences & Agricultural Technology</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black: #111110;
+    --gray-dark: #3a3a38;
+    --gray-mid: #888780;
+    --gray-light: #d4d2ca;
+    --gray-pale: #f2f0eb;
+    --white: #fafaf8;
+    --accent: #111110;
+    --field: #3b6d11;
+    --activity: #185fa5;
+    --lecture: #854f0b;
+  }
+
+  html { font-size: 16px; scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--white);
+    color: var(--black);
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* ── Layout ── */
+  .page { max-width: 760px; margin: 0 auto; padding: 4rem 2rem 6rem; }
+
+  /* ── Header ── */
+  .site-header { margin-bottom: 4rem; }
+  .eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 300;
+    letter-spacing: 0.12em;
+    color: var(--gray-mid);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+  .site-header h1 {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 300;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--black);
+    margin-bottom: 0.5rem;
+  }
+  .site-header h1 em {
+    font-style: italic;
+    font-weight: 300;
+  }
+  .subtitle {
+    font-size: 14px;
+    color: var(--gray-mid);
+    margin-top: 0.75rem;
+  }
+  .divider { border: none; border-top: 1px solid var(--gray-light); margin: 2.5rem 0; }
+
+  /* ── Section labels ── */
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gray-mid);
+    margin-bottom: 1.25rem;
+  }
+
+  /* ── Contacts ── */
+  .contacts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1px;
+    background: var(--gray-light);
+    border: 1px solid var(--gray-light);
+    margin-bottom: 3rem;
+  }
+  .contact-cell {
+    background: var(--white);
+    padding: 1rem 1.25rem;
+  }
+  .contact-name {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--black);
+    line-height: 1.4;
+    margin-bottom: 4px;
+  }
+  .contact-phone a {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    font-weight: 300;
+    color: var(--gray-mid);
+    text-decoration: none;
+  }
+  .contact-phone a:hover { color: var(--black); }
+
+  /* ── Hotel ── */
+  .hotel-block {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+    padding: 1.5rem 0;
+    border-top: 1px solid var(--gray-light);
+    border-bottom: 1px solid var(--gray-light);
+    margin-bottom: 3rem;
+  }
+  .hotel-name {
+    font-size: 17px;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.01em;
+  }
+  .hotel-meta {
+    font-size: 13px;
+    color: var(--gray-mid);
+    line-height: 2;
+  }
+  .hotel-meta a { color: var(--gray-dark); text-decoration: underline; text-underline-offset: 3px; }
+  .hotel-meta a:hover { color: var(--black); }
+
+  /* ── Schedule ── */
+  .schedule { margin-bottom: 3rem; }
+
+  .day { margin-bottom: 0; }
+  .day + .day .day-header { border-top: none; }
+
+  .day-header {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 1rem;
+    align-items: baseline;
+    padding: 0.9rem 0;
+    border-top: 1px solid var(--gray-light);
+  }
+  .day-date {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 300;
+    color: var(--gray-mid);
+    letter-spacing: 0.04em;
+  }
+  .day-name {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--black);
+  }
+
+  .activities { padding: 0 0 1rem; }
+
+  .activity-row {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 1rem;
+    align-items: baseline;
+    padding: 0.4rem 0;
+  }
+  .activity-time {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 300;
+    color: var(--gray-mid);
+    padding-top: 3px;
+  }
+  .activity-content {
+    font-size: 13.5px;
+    color: var(--black);
+    line-height: 1.5;
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 9.5px;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 2px 7px;
+    border-radius: 2px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .tag-field { background: #eaf3de; color: var(--field); }
+  .tag-activity { background: #e6f1fb; color: var(--activity); }
+  .tag-lecture { background: #faeeda; color: var(--lecture); }
+
+  .day-note {
+    font-size: 13px;
+    color: var(--gray-mid);
+    font-style: italic;
+    padding: 0.4rem 0 0.4rem 0;
+  }
+  .day-note-grid {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 1rem;
+  }
+
+  /* ── Last border ── */
+  .schedule-end { border-top: 1px solid var(--gray-light); }
+
+  /* ── Footer note ── */
+  .footnote {
+    font-size: 12px;
+    color: var(--gray-mid);
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--gray-light);
+  }
+
+  /* ── Fade-in ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .page > * {
+    animation: fadeUp 0.5s ease both;
+  }
+  .page > *:nth-child(1) { animation-delay: 0s; }
+  .page > *:nth-child(2) { animation-delay: 0.06s; }
+  .page > *:nth-child(3) { animation-delay: 0.12s; }
+  .page > *:nth-child(4) { animation-delay: 0.18s; }
+  .page > *:nth-child(5) { animation-delay: 0.24s; }
+  .page > *:nth-child(6) { animation-delay: 0.30s; }
+
+  @media (max-width: 540px) {
+    .page { padding: 2.5rem 1.25rem 4rem; }
+    .day-header,
+    .activity-row,
+    .day-note-grid { grid-template-columns: 1fr; gap: 2px; }
+    .day-date { display: none; }
+    .hotel-block { flex-direction: column; gap: 1rem; }
+  }
+</style>
+</head>
+<body>
+<main class="page">
+
+  <header class="site-header">
+    <p class="eyebrow">Faculty of Animal Sciences &amp; Agricultural Technology</p>
+    <h1>Summer School <em>2026</em></h1>
+    <p class="subtitle">July 5 – 11, 2026</p>
+  </header>
+
+  <!-- Contacts -->
+  <p class="section-label">Program Committee</p>
+  <div class="contacts-grid">
+    <div class="contact-cell">
+      <div class="contact-name">Asst. Prof. Dr. Anawach Boonyapakdee</div>
+      <div class="contact-phone"><a href="tel:+66812910675">081-291-0675</a></div>
+    </div>
+    <div class="contact-cell">
+      <div class="contact-name">Asst. Prof. Dr. Phawat Seritrakul</div>
+      <div class="contact-phone"><a href="tel:+66869628955">086-962-8955</a></div>
+    </div>
+    <div class="contact-cell">
+      <div class="contact-name">Asst. Prof. Dr. Panida Duangkaew</div>
+      <div class="contact-phone"><a href="tel:+66894599698">089-459-9698</a></div>
+    </div>
+    <div class="contact-cell">
+      <div class="contact-name">Asst. Prof. Dr. Sararat Monkhlang</div>
+      <div class="contact-phone"><a href="tel:+66861682845">086-168-2845</a></div>
+    </div>
+  </div>
+
+  <!-- Hotel -->
+  <p class="section-label">Accommodation</p>
+  <div class="hotel-block">
+    <div>
+      <div class="hotel-name">Kiang Haad Beach Hua Hin Hotel</div>
+      <div class="hotel-meta">
+        <a href="tel:+66944871637" style="color:var(--gray-mid);text-decoration:none;">094 487 1637</a><br>
+        <a href="mailto:info@khbeach.com">info@khbeach.com</a><br>
+        <a href="https://lin.ee/XDWNRVH" target="_blank">Line: lin.ee/XDWNRVH</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Schedule -->
+  <p class="section-label">Program Schedule</p>
+  <div class="schedule">
+
+    <!-- Day 1 -->
+    <div class="day">
+      <div class="day-header">
+        <span class="day-date">05 Jul · Sun</span>
+        <span class="day-name">Day 1 — Arrival</span>
+      </div>
+      <div class="activities">
+        <div class="activity-row">
+          <div class="activity-time"></div>
+          <div class="activity-content" style="color:#888780;font-style:italic;">Participants arrival</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Day 2 -->
+    <div class="day">
+      <div class="day-header">
+        <span class="day-date">06 Jul · Mon</span>
+        <span class="day-name">Day 2 — Opening</span>
+      </div>
+      <div class="activities">
+        <div class="activity-row">
+          <div class="activity-time">09:00 – 09:30</div>
+          <div class="activity-content">Opening Ceremony</div>
+        </div>
+        <div class="activity-row">
+          <div class="activity-time">09:30 – 10:30</div>
+          <div class="activity-content"><span class="tag tag-activity">Activity 1</span> Cultural Exchange</div>
+        </div>
+        <div class="activity-row">
+          <div class="activity-time">11:00 – 12:00</div>
+          <div class="activity-content"><span class="tag tag-lecture">Lecture</span> Coastal Blue Ecosystem — Prof. Casido</div>
+        </div>
+        <div class="activity-row">
+          <div class="activity-time">12:00 – 13:00</div>
+          <div class="activity-content" style="color:#888780;">Lunch</div>
+        </div>
+        <div class="activity-row">
+          <div class="activity-time">13:00 – 14:30</div>
+          <div class="activity-content"><span class="tag tag-activity">Activity 2</span> Thai Food &amp; Dessert with Local Ingredients</div>
+        </div>
+        <div class="activity-row">
+          <div class="activity-time">15:00 – 16:30</div>
+          <div class="activity-content">SU Campus Tour</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Day 3 -->
+    <div class="day">
+      <div class="day-header">
+        <span class="day-date">07 Jul · Tue</span>
+        <span class="day-name">Day 3 — Field &amp; City</span>
+      </div>
+      <div class="activities">
+        <div class="activity-row">
+          <div class="activity-time">09:00 – 12:00</div>
+          <div class="activity-content"><span class="tag tag-field">Field Trip 1</span> Phetchaburi Aquatic Demonstration Farm</div>
+        </div>
+        <div class="activity-row">
+          <div class="activity-time">12:00 – 13:00</div>
+          <div class="activity-content" style="color:#888780;">Lunch</div>
+        </div>
+        <div class="activity-row">
+          <div class="activity-time">13:00 – 16:30</div>
+          <div class="activity-content">Phetchaburi City Tour</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Day 4 -->
+    <div class="day">
+      <div class="day-header">
+        <span class="day-date">08 Jul · Wed</span>
+        <span class="day-name">Day 4 — Lab Activities</span>
+      </div>
+      <div class="activities">
+        <div class="activity-row">
+          <div class="activity-time">09:00 – 12:00</div>
+          <div class="activity-content"><span class="tag tag-activity">Activity 3</span> Natural Products from Plant Extract</div>
+        </div>
+        <div class="activity-row">
+          <div class="activity-time">12:00 – 14:00</div>
+          <div class="activity-content" style="color:#888780;">Lunch</div>
+        </div>
+        <div class="activity-row">
+          <div class="activity-time">14:00 – 16:30</div>
+          <div class="activity-content"><span class="tag tag-activity">Activity 4</span> Animal Feed Quick Test</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Day 5 -->
+    <div class="day">
+      <div class="day-header">
+        <span class="day-date">09 Jul · Thu</span>
+        <span class="day-name">Day 5 — Nature</span>
+      </div>
+      <div class="activities">
+        <div class="activity-row">
+          <div class="activity-time">09:00 – 12:00</div>
+          <div class="activity-content"><span class="tag tag-field">Field Trip 2</span> Pala-U Fruit Orchard</div>
+        </div>
+        <div class="activity-row">
+          <div class="activity-time">12:00 – 13:00</div>
+          <div class="activity-content" style="color:#888780;">Lunch</div>
+        </div>
+        <div class="activity-row">
+          <div class="activity-time">14:00 – 16:30</div>
+          <div class="activity-content">Pranburi Mangrove Park Tour</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Day 6 -->
+    <div class="day">
+      <div class="day-header">
+        <span class="day-date">10 Jul · Fri</span>
+        <span class="day-name">Day 6 — Closing</span>
+      </div>
+      <div class="activities">
+        <div class="activity-row">
+          <div class="activity-time">09:00 – 12:00</div>
+          <div class="activity-content"><span class="tag tag-activity">Activity 5</span> Edible Insects Workshop</div>
+        </div>
+        <div class="activity-row">
+          <div class="activity-time">12:00 – 13:00</div>
+          <div class="activity-content" style="color:#888780;">Lunch</div>
+        </div>
+        <div class="activity-row">
+          <div class="activity-time">13:00 – 16:30</div>
+          <div class="activity-content">Closing Ceremony</div>
+        </div>
+        <div class="activity-row">
+          <div class="activity-time">17:00 – 21:00</div>
+          <div class="activity-content">Farewell Dinner</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Day 7 -->
+    <div class="day">
+      <div class="day-header">
+        <span class="day-date">11 Jul · Sat</span>
+        <span class="day-name">Day 7 — Departure</span>
+      </div>
+      <div class="activities">
+        <div class="activity-row">
+          <div class="activity-time"></div>
+          <div class="activity-content" style="color:#888780;font-style:italic;">Participants departure</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="schedule-end"></div>
+  </div>
+
+  <p class="footnote">* The schedule is subject to change as appropriate.</p>
+
+</main>
+</body>
+</html>
